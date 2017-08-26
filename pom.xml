@@ -8,7 +8,20 @@
   <packaging>maven-plugin</packaging>
 
   <name>commit-level-coverage-report</name>
+  <description>This project enables coverage reporting at a commit level</description>
   <url>https://github.com/juliangamble/commit-level-coverage-report</url>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/juliangamble/commit-level-coverage-report</url>
+  </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
