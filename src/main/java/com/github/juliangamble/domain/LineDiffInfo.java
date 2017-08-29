@@ -1,4 +1,4 @@
-package org.machiavellian.domain;
+package com.github.juliangamble.domain;
 
 /**
  * Copyright [2017] [Julian Gamble]

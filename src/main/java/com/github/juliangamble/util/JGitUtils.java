@@ -1,4 +1,4 @@
-package org.machiavellian.util;
+package com.github.juliangamble.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jgit.lib.Constants;

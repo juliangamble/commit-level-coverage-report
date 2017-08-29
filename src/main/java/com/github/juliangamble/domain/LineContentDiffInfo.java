@@ -1,4 +1,4 @@
-package org.machiavellian.domain;
+package com.github.juliangamble.domain;
 
 /**
  * Copyright [2017] [Julian Gamble]
@@ -9,6 +9,7 @@ package org.machiavellian.domain;
 
  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
  */
+
 /**
  * Retain information from cobertura about covered and uncovered lines we care about
  * Created by juliangamble on 16/7/17.

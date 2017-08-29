@@ -35,17 +35,15 @@ import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.analysis.IClassCoverage;
 import org.jacoco.core.analysis.ICounter;
 import org.jacoco.core.tools.ExecFileLoader;
-import org.jacoco.maven.AbstractReportMojo;
-import org.machiavellian.domain.LineContentDiffInfo;
-import org.machiavellian.domain.LineDiffInfo;
-import org.machiavellian.util.JGitUtils;
+import com.github.juliangamble.domain.LineContentDiffInfo;
+import com.github.juliangamble.domain.LineDiffInfo;
+import com.github.juliangamble.util.JGitUtils;
 import org.jacoco.report.IReportGroupVisitor;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnmappableCharacterException;
 import java.nio.file.Files;
@@ -251,10 +249,10 @@ public class ReportOnCommitCoverageMojo extends AbstractReportMojo {
 
 		Set<LineContentDiffInfo> lineDiffsIntersectingWithCoberturaLines = new HashSet(coverageDiffs);
 		lineDiffsIntersectingWithCoberturaLines.retainAll(commitDiffs);
-		System.out.println("Intersection of line changes with coverage (lines we care about): " + lineDiffsIntersectingWithCoberturaLines.size());
+		//System.out.println("Intersection of line changes with coverage (lines we care about): " + lineDiffsIntersectingWithCoberturaLines.size());
 
 		Set<LineContentDiffInfo> lineDiffsFromCoberturaWithCoverage = getLineDiffsFromCoberturaWithCoverage(lineDiffsIntersectingWithCoberturaLines, true, true);
-		System.out.println("covered lines: " + lineDiffsFromCoberturaWithCoverage.size());
+		System.out.println("Covered lines: " + lineDiffsFromCoberturaWithCoverage.size());
 
 		double coverage = ((double)lineDiffsFromCoberturaWithCoverage.size()) / lineDiffsIntersectingWithCoberturaLines.size();
 		int coveragePercent = (int) Math.ceil(coverage * 100);
@@ -418,7 +416,7 @@ public class ReportOnCommitCoverageMojo extends AbstractReportMojo {
 			String className = cc.getName();
 			String fileName = '/' + className.replace('.', '/') + ".java";
 			fileName = fileName.replaceAll("\\$\\d+","");
-			System.out.println("source file name: " + fileName);
+			//System.out.println("source file name: " + fileName);
 			File sourceFile = new File(PROJECT_DIR, "src/main/java" + fileName);
 			if (sourceFile.exists()) {
 
