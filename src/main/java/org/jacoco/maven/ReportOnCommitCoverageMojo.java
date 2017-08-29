@@ -46,7 +46,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.charset.UnmappableCharacterException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.util.*;
 
 /**
@@ -99,10 +102,10 @@ public class ReportOnCommitCoverageMojo extends AbstractReportMojo {
 	@Parameter(property = "jacoco.targetDirectory", defaultValue = "${project.build.directory}/")
 	private File targetDir;
 
-    /**
-     * Report file
+	/**
+	 * Report file
 	 */
-	private FileOutputStream fos;
+	private static FileOutputStream fos;
 
 	@Override
 	boolean canGenerateReportRegardingDataFiles() {
@@ -128,7 +131,7 @@ public class ReportOnCommitCoverageMojo extends AbstractReportMojo {
 
 	@Override
 	void createReport(final IReportGroupVisitor visitor,
-			final ReportSupport support) throws IOException {
+					  final ReportSupport support) throws IOException {
 		List<RevCommit> commits = getListOfCommits();
 		setupOutputFile();
 
@@ -138,11 +141,14 @@ public class ReportOnCommitCoverageMojo extends AbstractReportMojo {
 			System.out.println("Commit: " + commit.getName() + " - " + commit.getAuthorIdent().getWhen() + " - " + commit.getAuthorIdent().getName() + " - " + commit.getFullMessage());
 			Set<LineContentDiffInfo> unionDiffs = getCoverageOnCommitLines(commit);
 		}
-		fos.close();
+		if (fos!=null) {
+			fos.close();
+		}
 	}
 
 	private void setupOutputFile() {
 		try {
+			outputDirectory.mkdirs();
 			File f = new File(outputDirectory,"coverage-per-commit.txt");
 			fos = new FileOutputStream(f);
 			//we will want to print in standard "System.out" and in "file"
@@ -411,25 +417,32 @@ public class ReportOnCommitCoverageMojo extends AbstractReportMojo {
 
 			String className = cc.getName();
 			String fileName = '/' + className.replace('.', '/') + ".java";
+			fileName = fileName.replaceAll("\\$\\d+","");
 			System.out.println("source file name: " + fileName);
 			File sourceFile = new File(PROJECT_DIR, "src/main/java" + fileName);
+			if (sourceFile.exists()) {
 
-			Charset charset = Charset.defaultCharset();
-			List<String> stringList = null;
-			try {
-				stringList = Files.readAllLines(sourceFile.toPath(), charset);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			String[] stringArray = stringList.toArray(new String[]{});
+				//Charset charset = Charset.defaultCharset();
+				List<String> stringList = new ArrayList<>();
+				try {
+					stringList = Files.readAllLines(sourceFile.toPath(), StandardCharsets.ISO_8859_1);
+				} catch (UnmappableCharacterException e) {
+					e.printStackTrace();
+				} catch (NoSuchFileException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				String[] stringArray = stringList.toArray(new String[]{});
 
-			for (int i = cc.getFirstLine(); i <= cc.getLastLine(); i++) {
-				int lineNumber = i;
-				String codeLine = stringArray[i-1];
-				boolean isCovered = cc.getLine(i).getStatus() == ICounter.FULLY_COVERED;
-				boolean isCoverageApplicable = cc.getLine(i).getStatus() != 0;
-				if (isCoverageApplicable) {
-					result.add(new LineContentDiffInfo(lineNumber, "src/main/java" + fileName, codeLine, isCovered, isCoverageApplicable));
+				for (int i = cc.getFirstLine(); i <= cc.getLastLine(); i++) {
+					int lineNumber = i;
+					String codeLine = stringArray[i - 1];
+					boolean isCovered = cc.getLine(i).getStatus() == ICounter.FULLY_COVERED;
+					boolean isCoverageApplicable = cc.getLine(i).getStatus() != 0;
+					if (isCoverageApplicable) {
+						result.add(new LineContentDiffInfo(lineNumber, "src/main/java" + fileName, codeLine, isCovered, isCoverageApplicable));
+					}
 				}
 			}
 		}
