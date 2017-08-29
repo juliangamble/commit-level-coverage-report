@@ -32,10 +32,10 @@ public class JGitUtils {
      * Returns a list of commits since the minimum date starting from the
      * specified object id.
      *
-     * @param repository
+     * @param repository The Git repository to scan
      * @param objectId
      *            if unspecified, HEAD is assumed.
-     * @param minimumDate
+     * @param minimumDate The date to scan back through the git log
      * @return list of commits
      */
     public static List<RevCommit> getRevLog(Repository repository, String objectId, Date minimumDate) {
@@ -71,7 +71,7 @@ public class JGitUtils {
      * Determine if a repository has any commits. This is determined by checking
      * the for loose and packed objects.
      *
-     * @param repository
+     * @param repository The Git repository to scan
      * @return true if the repository has commits
      */
     public static boolean hasCommits(Repository repository) {
@@ -87,9 +87,9 @@ public class JGitUtils {
      * whatever branch HEAD points to, but if HEAD points to nothing it returns
      * the most recently updated branch.
      *
-     * @param repository
+     * @param repository The Git repository to scan
      * @return the objectid of a branch
-     * @throws Exception
+     * @throws Exception If there is a file issue
      */
     public static ObjectId getDefaultBranch(Repository repository) throws Exception {
         ObjectId object = repository.resolve(Constants.HEAD);
@@ -117,12 +117,12 @@ public class JGitUtils {
      * Returns the list of local branches in the repository. If repository does
      * not exist or is empty, an empty list is returned.
      *
-     * @param repository
+     * @param repository The Git repository to scan
      * @param fullName
      *            if true, /refs/heads/yadayadayada is returned. If false,
      *            yadayadayada is returned.
      * @param maxCount
-     *            if < 0, all local branches are returned
+     *            if &lt; 0, all local branches are returned
      * @return list of local branches
      */
     public static List<RefModel> getLocalBranches(Repository repository, boolean fullName,
@@ -133,7 +133,7 @@ public class JGitUtils {
     /**
      * Retrieves a Java Date from a Git commit.
      *
-     * @param commit
+     * @param commit The commit to examine
      * @return date of the commit or Date(0) if the commit is null
      */
     public static Date getAuthorDate(RevCommit commit) {
@@ -147,7 +147,7 @@ public class JGitUtils {
      * Returns a list of references in the repository matching "refs". If the
      * repository is null or empty, an empty list is returned.
      *
-     * @param repository
+     * @param repository The Git repository to scan
      * @param refs
      *            if unspecified, all refs are returned
      * @param fullName
@@ -193,7 +193,7 @@ public class JGitUtils {
     /**
      * Log an error message and exception.
      *
-     * @param t
+     * @param t The error reference
      * @param repository
      *            if repository is not null it MUST be the {0} parameter in the
      *            pattern.

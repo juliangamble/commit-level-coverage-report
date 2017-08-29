@@ -95,7 +95,7 @@ Then run this:
 
 # Result File Location
 
-    target/site/jacoco-ut/coverage-per-commit.txt
+    target/site/coverage-per-commit.txt
 
 
 
