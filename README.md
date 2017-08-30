@@ -24,12 +24,15 @@ This change is trying to solve the problem of knowing "for the lines I have touc
 Add the following into your `pom.xml`
 
     <project>
+        ...
         <build>
+            ...
             <plugins>
+                ...
                 <plugin>
                     <groupId>com.github.juliangamble</groupId>
                     <artifactId>commit-level-coverage-report</artifactId>
-                    <version>1.0</version>
+                    <version>1.0.1</version>
                     <executions>
                         <execution>
                             <id>post-unit-test2</id>

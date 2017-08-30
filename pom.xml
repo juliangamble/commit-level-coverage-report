@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.juliangamble</groupId>
   <artifactId>commit-level-coverage-report</artifactId>
-  <version>1.0</version>
+  <version>1.0.1</version>
   <packaging>maven-plugin</packaging>
   <name>commit-level-coverage-report</name>
   <description>This project enables coverage reporting at a commit level</description>
@@ -87,47 +87,6 @@
       </resource>
     </resources>
     <plugins>
-      <!--<plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-plugin-plugin</artifactId>
-        <version>3.5</version>
-        <configuration>
-          <goalPrefix>signature</goalPrefix>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>descriptor</goal>
-            </goals>
-            <phase>process-classes</phase>
-          </execution>
-        </executions>
-      </plugin>-->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-plugin-plugin</artifactId>
-        <version>3.5</version>
-        <configuration>
-          <goalPrefix>plugin</goalPrefix>
-          <outputDirectory>target/dir</outputDirectory>
-        </configuration>
-        <executions>
-          <execution>
-            <id>default-descriptor</id>
-            <goals>
-              <goal>descriptor</goal>
-            </goals>
-            <phase>process-classes</phase>
-          </execution>
-          <execution>
-            <id>help-descriptor</id>
-            <goals>
-              <goal>helpmojo</goal>
-            </goals>
-            <phase>process-classes</phase>
-          </execution>
-        </executions>
-      </plugin>
       <!-- explicitly make this work with a JDK 7 compiler -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -195,6 +154,30 @@
               <nexusUrl>https://oss.sonatype.org/</nexusUrl>
               <autoReleaseAfterClose>true</autoReleaseAfterClose>
             </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-plugin-plugin</artifactId>
+            <version>3.5</version>
+            <configuration>
+              <goalPrefix>plugin</goalPrefix>
+            </configuration>
+            <executions>
+              <execution>
+                <id>default-descriptor</id>
+                <goals>
+                  <goal>descriptor</goal>
+                </goals>
+                <phase>process-classes</phase>
+              </execution>
+              <execution>
+                <id>help-descriptor</id>
+                <goals>
+                  <goal>helpmojo</goal>
+                </goals>
+                <phase>process-classes</phase>
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>
