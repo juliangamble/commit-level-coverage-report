@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.juliangamble</groupId>
   <artifactId>commit-level-coverage-report</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <packaging>maven-plugin</packaging>
   <name>commit-level-coverage-report</name>
   <description>This project enables coverage reporting at a commit level</description>
@@ -54,7 +54,7 @@
     <dependency>
       <groupId>org.jacoco</groupId>
       <artifactId>jacoco-maven-plugin</artifactId>
-      <version>0.7.10-SNAPSHOT</version>
+      <version>0.7.9</version>
       <!-- version for Java 7 -->
       <!-- <version>0.6.5.201403032054</version> -->
     </dependency>

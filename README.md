@@ -32,7 +32,7 @@ Add the following into your `pom.xml`
                 <plugin>
                     <groupId>com.github.juliangamble</groupId>
                     <artifactId>commit-level-coverage-report</artifactId>
-                    <version>1.0.1</version>
+                    <version>1.0.2</version>
                     <executions>
                         <execution>
                             <id>post-unit-test2</id>
