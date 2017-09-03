@@ -8,10 +8,15 @@ This project enables commit-level coverage reporting.
 [Workplace with a million line codebase and 100s of developers working on it.]
 
 Tech Lead: "We really want to get the coverage up on this codebase - more tests will give us more feedback about the code."
+
 Developer: "Well that's lovely, but I really need to ship my feature - I'll make sure my stuff is covered as best I can."
+
 Tech Lead: "Ok - how much coverage are you aiming for?"
+
 Developer: "I'll make sure the lines I touch have coverage."
+
 Tech Lead: "Ok - how will you measure that?"
+
 ....
 
 Now obviously (a) this codebase is a candidate for modularisation and (b) sonar does give you feedback on coverage at a commit level - but sonar doesn't give you a way to know what the commit-level coverage is prior to pushing your changes. ie - if you've missed some coverage on the lines you've changed - there isn't a way to know before pushing.
